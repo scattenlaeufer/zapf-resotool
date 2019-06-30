@@ -1,0 +1,56 @@
+{% extends "resoapp/base.html" %}
+
+{% block content %}
+
+<h2>Dies ist die Liste aller Resolutionen</h2>
+
+<table class="table">
+	<tr>
+		<th>
+			Titel
+		</th>
+		<th>
+			Typ
+		</th>
+		<th>
+			verfassende Personen
+		</th>
+		<th>
+			eingereicht
+		</th>
+		<th>
+			verabschiedet
+		</th>
+		<th>
+			versandt
+		</th>
+	</tr>
+	{% for resolution in resolution_list %}
+	<tr>
+		<td>
+			<a href="{% url "resoapp:resolution" resolution.id %}">{{ resolution.title }}</a>
+		</td>
+		<td>
+			{{ resolution.get_reso_type_display }}
+		</td>
+		<td>
+			{{ resolution.user_set.all|join:", " }}
+		</td>
+		<td>
+			{{ resolution.date_submitted|date:"Y-m-d H:i" }}
+		</td>
+		<td>
+			{{ resolution.date_enacted|date:"Y-m-d" }}
+		</td>
+		<td>
+			{% if resolution.reso_type == 0 %}
+				{{ resolution.date_sesnt|date:"Y-m-d" }}
+			{% else %}
+				N/A
+			{% endif %}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}
