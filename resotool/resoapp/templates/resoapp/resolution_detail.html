@@ -3,7 +3,7 @@
 {% block content %}
 <h2>{{ resolution.title }}</h2>
 <p><b>antragstellende Personen:</b> {{ resolution.user_set.all|join:", " }}</p> 
-<p><b>einereicht:</b> {{ resolution.date_submitted|date:"Y-m-d H:i" }}</p>
+<p><b>eingereicht:</b> {{ resolution.date_submitted|date:"Y-m-d H:i" }}</p>
 <p><b>verabschiedet:</b> {{ resolution.date_enacted|date:"Y-m-d" }}</p>
 {% if resolution.reso_type == 0 %}
 <p><b>verschickt:</b> {{ resolution.date_sent|date:"Y-m-d" }}</p>

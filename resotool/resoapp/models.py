@@ -10,7 +10,7 @@ class Resolution(models.Model):
     date_sent = models.DateField(blank=True, null=True)
     reso_type = models.IntegerField(
         default=0,
-        choices=[(0, "Resoution"), (1, "Positionspapier"), (2, "Selbstverpflichtung")],
+        choices=[(0, "Resolution"), (1, "Positionspapier"), (2, "Selbstverpflichtung")],
     )
     reso_text = models.TextField()
     reso_text_html = models.TextField(default="")
