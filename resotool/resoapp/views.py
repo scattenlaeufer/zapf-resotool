@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.views import generic
 
@@ -11,3 +12,7 @@ class ResolutionListView(generic.ListView):
 
 class ResolutionView(generic.DetailView):
     model = Resolution
+
+
+def send_resolution(request, reso_id):
+    return HttpRequest("works")
