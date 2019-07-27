@@ -5,6 +5,9 @@ A bit of software to manage ZaPF resolutions
 
 ## Hacking
 
+To develop resotool you will need `python` (`3.7+`) and
+[poetry](https://github.com/sdispater/poetry).
+
 To start help developing `resotool` run
 ```
 poetry install
