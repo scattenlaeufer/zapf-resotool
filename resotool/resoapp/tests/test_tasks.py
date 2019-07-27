@@ -8,7 +8,7 @@ import time
 import toml
 from unittest import skip, skipUnless
 
-from resoapp.models import Addressee, Resolution, ResolutionEmail, SendStatus
+from resoapp.models import Recipient, Resolution, ResolutionEmail, SendStatus
 from resoapp.tasks import send_reso
 from utils import celery_is_up
 
@@ -32,15 +32,15 @@ class BasicMailTests(TestCase):
 class SendMailTests(BasicMailTests):
     def setUp(self):
         super().setUp()
-        self.reso.addressee_set.create(name="Test Recipient 1", email="test1@test.com")
-        self.reso.addressee_set.create(name="Test Recipient 2", email="test2@test.com")
+        self.reso.recipient_set.create(name="Test Recipient 1", email="test1@test.com")
+        self.reso.recipient_set.create(name="Test Recipient 2", email="test2@test.com")
 
     def test_basic_mail_sending(self):
         result = send_reso(self.reso.pk, self.mail_text, self.subject, self.sender)
         self.assertEqual(result, len(mail.outbox))
-        self.assertEqual(len(self.reso.addressee_set.all()), len(mail.outbox))
+        self.assertEqual(len(self.reso.recipient_set.all()), len(mail.outbox))
         self.assertEqual(
-            len(self.reso.addressee_set.all()), len(ResolutionEmail.objects.all())
+            len(self.reso.recipient_set.all()), len(ResolutionEmail.objects.all())
         )
 
 
@@ -58,7 +58,7 @@ class SendCeleryMailTests(BasicMailTests):
         super().setUp()
         self.sender = f"Test Out <{test_config['out']['email']}>"
         for i, email in enumerate(test_config["in"]["email"]):
-            self.reso.addressee_set.create(name=f"Test Recipient {i+1}", email=email)
+            self.reso.recipient_set.create(name=f"Test Recipient {i+1}", email=email)
 
         ssl_context = ssl.SSLContext()
         self.mail_box = imaplib.IMAP4(
@@ -85,7 +85,7 @@ class SendCeleryMailTests(BasicMailTests):
         for reso_mail in ResolutionEmail.objects.all():
             self.assertEqual(SendStatus.IN_PROGRESS, reso_mail.status)
         self.assertEqual(
-            len(self.reso.addressee_set.all()), len(ResolutionEmail.objects.all())
+            len(self.reso.recipient_set.all()), len(ResolutionEmail.objects.all())
         )
         for result in results:
             self.assertEqual(1, result.get(timeout=5))
@@ -98,4 +98,4 @@ class SendCeleryMailTests(BasicMailTests):
         self.mail_box.select()
         response, mail_data = self.mail_box.search(None, "ALL")
         mail_nums = mail_data[0].split()
-        self.assertEqual(len(self.reso.addressee_set.all()), len(mail_nums))
+        self.assertEqual(len(self.reso.recipient_set.all()), len(mail_nums))

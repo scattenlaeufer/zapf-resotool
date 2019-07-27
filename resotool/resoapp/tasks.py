@@ -10,10 +10,10 @@ def send_reso(reso_id, mail_text, subject, sender):
     resolution = Resolution.objects.get(pk=reso_id)
     mail_list = []
     mail_data_list = []
-    for recipient in resolution.addressee_set.all():
+    for recipient in resolution.recipient_set.all():
         mail_data_list.append((subject, mail_text, sender, [str(recipient)]))
         reso_mail = ResolutionEmail(
-            addressee=recipient,
+            recipient=recipient,
             resolution=resolution,
             email_text=mail_text,
             status=SendStatus.IN_PROGRESS,

@@ -54,14 +54,14 @@ class Resolution(models.Model):
         return ResoType.name(self.reso_type)
 
 
-class AddresseeCollection(models.Model):
+class RecipientCollection(models.Model):
     name = models.CharField(max_length=200)
 
 
-class Addressee(models.Model):
+class Recipient(models.Model):
     name = models.CharField(max_length=200)
     resolutions = models.ManyToManyField(Resolution)
-    addressee_collection = models.ManyToManyField(AddresseeCollection)
+    recipient_collection = models.ManyToManyField(RecipientCollection)
     note = models.TextField(default="")
     email = models.EmailField(default="")
     opening = models.CharField(max_length=200)
@@ -73,7 +73,7 @@ class Addressee(models.Model):
 
 class ResolutionEmail(models.Model):
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE)
-    addressee = models.ForeignKey(Addressee, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(Recipient, on_delete=models.CASCADE)
     email_text = models.TextField()
     status = enum.EnumField(SendStatus, default=SendStatus.NOT_SENT)
 
