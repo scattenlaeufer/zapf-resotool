@@ -1,5 +1,20 @@
 from django.db import models
 
+import enum
+
+
+class ResoType(enum.IntFlag):
+    RESOLUTION = enum.auto()
+    POSITIONSPAPIER = enum.auto()
+    SELBSTVERPFLICHTUNG = enum.auto()
+
+
+class SendStatus(enum.IntFlag):
+    SUCCESS = enum.auto()
+    FAILURE = enum.auto()
+    IN_PROGRESS = enum.auto()
+    NOT_SENT = enum.auto()
+
 
 class Resolution(models.Model):
     title = models.CharField(max_length=200)
@@ -7,8 +22,8 @@ class Resolution(models.Model):
     date_enacted = models.DateTimeField(blank=True, null=True)
     date_sent = models.DateField(blank=True, null=True)
     reso_type = models.IntegerField(
-        default=0,
-        choices=[(0, "Resolution"), (1, "Positionspapier"), (2, "Selbstverpflichtung")],
+        default=ResoType.RESOLUTION,
+        choices=[(e.value, e.name.lower().replace("_", " ")) for e in ResoType],
     )
     reso_text = models.TextField()
     reso_text_html = models.TextField(default="")
@@ -39,7 +54,7 @@ class ResolutionEmail(models.Model):
     addressee = models.ForeignKey(Addressee, on_delete=models.CASCADE)
     email_text = models.TextField()
     status = models.IntegerField(
-        choices=[(0, "success"), (1, "failure"), (2, "in progress"), (4, "not sent")]
+        choices=[(e.value, e.name.lower().replace("_", " ")) for e in SendStatus],
     )
 
 
