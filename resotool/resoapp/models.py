@@ -1,7 +1,5 @@
 from django.db import models
 
-from resoapp import local_settings
-
 
 class Resolution(models.Model):
     title = models.CharField(max_length=200)
@@ -16,7 +14,7 @@ class Resolution(models.Model):
     reso_text_html = models.TextField(default="")
     motivation_text = models.TextField(default="")
     motivation_text_html = models.TextField(default="")
-    pdf_path = models.FilePathField(path=local_settings.RESO_PATH, default="")
+    pdf_path = models.FilePathField(default="")
 
     def __str__(self):
         return self.title
