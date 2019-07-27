@@ -41,12 +41,7 @@ class ResolutionEmail(models.Model):
     addressee = models.ForeignKey(Addressee, on_delete=models.CASCADE)
     email_text = models.TextField()
     status = models.IntegerField(
-        choices=[
-            (0, "success"),
-            (1, "failure"),
-            (2, "in progress"),
-            (4, "not sent"),
-        ],
+        choices=[(0, "success"), (1, "failure"), (2, "in progress"), (4, "not sent")]
     )
 
 
