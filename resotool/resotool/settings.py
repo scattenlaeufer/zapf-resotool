@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "django_celery_results",
+    "djcelery_email",
 ]
 
 MIDDLEWARE = [
@@ -123,7 +124,12 @@ STATIC_URL = '/static/'
 
 # Email
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+
+CELERY_EMAIL_TASK_CONFIG = {
+    'ignore_result': False,
+}
+CELERY_EMAIL_CHUNK_SIZE = 1
 
 # Celery stuff
 
