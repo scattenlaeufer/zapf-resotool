@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 # other stuff
-tests/test_config.ini
+resotool/resoapp/tests/celery_mail_test_settings.toml
