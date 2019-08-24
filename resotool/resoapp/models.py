@@ -48,6 +48,9 @@ class Addressee(models.Model):
     opening = models.CharField(max_length=200)
     postal_adress = models.CharField(max_length=400)
 
+    def __str__(self):
+        return f"{self.name} <{self.email}>"
+
 
 class ResolutionEmail(models.Model):
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE)
