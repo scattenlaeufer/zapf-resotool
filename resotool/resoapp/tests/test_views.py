@@ -1,8 +1,6 @@
 from django.core import mail
 from django.test import TestCase
 
-from resoapp.views import send_resolution
-
 
 class SendResoTests(TestCase):
     def setUp(self):

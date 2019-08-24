@@ -6,5 +6,4 @@ app_name = "resoapp"
 urlpatterns = [
     path("", views.ResolutionListView.as_view(), name="index"),
     path("<int:pk>/", views.ResolutionView.as_view(), name="resolution"),
-    path("sendreso/<int:reso_id>/", views.send_resolution, name="send_reso"),
 ]
