@@ -43,7 +43,7 @@
 			{{ resolution.date_enacted|date:"Y-m-d" }}
 		</td>
 		<td>
-			{% if resolution.reso_type == 0 %}
+			{% if resolution.reso_type_name == "RESOLUTION" %}
 				{{ resolution.date_sesnt|date:"Y-m-d" }}
 			{% else %}
 				N/A

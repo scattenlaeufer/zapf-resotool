@@ -11,6 +11,7 @@ Django = "^2.2"
 celery = "^4.3"
 Markdown = "^3.1"
 pytest-django = "^3.5"
+django-enumfield = "^1.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"

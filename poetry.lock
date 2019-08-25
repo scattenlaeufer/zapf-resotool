@@ -70,6 +70,14 @@ sqlparse = "*"
 
 [[package]]
 category = "main"
+description = "Custom Django field for using enumerations of named constants"
+name = "django-enumfield"
+optional = false
+python-versions = "*"
+version = "1.5"
+
+[[package]]
+category = "main"
 description = "Read metadata from Python packages"
 name = "importlib-metadata"
 optional = false
@@ -232,7 +240,7 @@ python-versions = ">=2.7"
 version = "0.5.1"
 
 [metadata]
-content-hash = "ddc345d4f0cd971d33abb438cdb719f80c9b5f491a97dd1c3672e6775a52022a"
+content-hash = "a612e18901c13d08c99929c164298779cb5c264cd2a74dae39a5248e7f58f575"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -243,6 +251,7 @@ billiard = ["756bf323f250db8bf88462cd042c992ba60d8f5e07fc5636c24ba7d6f4261d84"]
 celery = ["4c4532aa683f170f40bd76f928b70bc06ff171a959e06e71bf35f2f9d6031ef9", "528e56767ae7e43a16cfef24ee1062491f5754368d38fcfffa861cdb9ef219be"]
 colorama = ["05eed71e2e327246ad6b38c540c4a3117230b19679b875190486ddd2d721422d", "f8ac84de7840f5b9c4e3347b3c1eaa50f7e49c2b07596221daec5edaabbd7c48"]
 django = ["753d30d3eb078064d2ddadfea65083c9848074a7f93d7b4dc7fa6b1380d278f5", "7cb67e8b934fab23b6daed7144da52e8a25a47eba7f360ca43d2b448506b01ad"]
+django-enumfield = ["afd01629f32a1a96d260dd9bf814c8970184d2f66b7f9fda669e0adc7fd9349c"]
 importlib-metadata = ["6dfd58dfe281e8d240937776065dd3624ad5469c835248219bd16cf2e12dbeb7", "cb6ee23b46173539939964df59d3d72c3e0c1b5d54b84f1d8a7e912fe43612db"]
 kombu = ["55b71d3785def3470a16217fe0780f9e6f95e61bf9ad39ef8dce0177224eab77", "eb365ea795cd7e629ba2f1f398e0c3ba354b91ef4de225ffdf6ab45fdfc7d581"]
 markdown = ["2e50876bcdd74517e7b71f3e7a76102050edec255b3983403f1a63e7c8a41e7a", "56a46ac655704b91e5b7e6326ce43d5ef72411376588afa1dd90e881b83c7e8c"]
