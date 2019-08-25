@@ -1,19 +1,26 @@
 from django.db import models
-
-import enum
-
-
-class ResoType(enum.IntFlag):
-    RESOLUTION = enum.auto()
-    POSITIONSPAPIER = enum.auto()
-    SELBSTVERPFLICHTUNG = enum.auto()
+from django_enumfield import enum
 
 
-class SendStatus(enum.IntFlag):
-    SUCCESS = enum.auto()
-    FAILURE = enum.auto()
-    IN_PROGRESS = enum.auto()
-    NOT_SENT = enum.auto()
+class ResoType(enum.Enum):
+    RESOLUTION = 1
+    POSITIONSPAPIER = 2
+    SELBSTVERPFLICHTUNG = 3
+
+    labels = {
+        RESOLUTION: "Resolution",
+        POSITIONSPAPIER: "Positionspapier",
+        SELBSTVERPFLICHTUNG: "Selbstverpflichtung",
+    }
+
+
+class SendStatus(enum.Enum):
+    SUCCESS = 1
+    FAILURE = 2
+    IN_PROGRESS = 3
+    NOT_SENT = 4
+
+    _transitions = {NOT_SENT: (IN_PROGRESS,)}
 
 
 class Resolution(models.Model):
@@ -21,10 +28,7 @@ class Resolution(models.Model):
     date_submitted = models.DateTimeField(auto_now_add=True)
     date_enacted = models.DateTimeField(blank=True, null=True)
     date_sent = models.DateField(blank=True, null=True)
-    reso_type = models.IntegerField(
-        default=ResoType.RESOLUTION,
-        choices=[(e.value, e.name.lower().replace("_", " ")) for e in ResoType],
-    )
+    reso_type = enum.EnumField(ResoType, default=ResoType.RESOLUTION)
     reso_text = models.TextField()
     reso_text_html = models.TextField(default="")
     motivation_text = models.TextField(default="")
@@ -33,6 +37,9 @@ class Resolution(models.Model):
 
     def __str__(self):
         return self.title
+
+    def reso_type_name(self):
+        return ResoType.name(self.reso_type)
 
 
 class AddresseeCollection(models.Model):
@@ -56,9 +63,10 @@ class ResolutionEmail(models.Model):
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE)
     addressee = models.ForeignKey(Addressee, on_delete=models.CASCADE)
     email_text = models.TextField()
-    status = models.IntegerField(
-        choices=[(e.value, e.name.lower().replace("_", " ")) for e in SendStatus],
-    )
+    status = enum.EnumField(SendStatus, default=SendStatus.NOT_SENT)
+
+    def send_status_name(self):
+        return SendStatus.name(self.send_status)
 
 
 class UserGroup(models.Model):
