@@ -20,7 +20,12 @@ class SendStatus(enum.Enum):
     IN_PROGRESS = 3
     NOT_SENT = 4
 
-    _transitions = {NOT_SENT: (IN_PROGRESS,)}
+    _transitions = {
+        SUCCESS: (FAILURE, IN_PROGRESS, NOT_SENT),
+        FAILURE: (SUCCESS, IN_PROGRESS, NOT_SENT),
+        IN_PROGRESS: (SUCCESS, FAILURE, NOT_SENT),
+        NOT_SENT: (IN_PROGRESS,),
+    }
 
 
 class Resolution(models.Model):
