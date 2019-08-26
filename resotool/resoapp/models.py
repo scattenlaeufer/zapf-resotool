@@ -20,6 +20,13 @@ class SendStatus(enum.Enum):
     IN_PROGRESS = 3
     NOT_SENT = 4
 
+    labels = {
+        SUCCESS: "versandt",
+        FAILURE: "fehlgeschlagen",
+        IN_PROGRESS: "in Arbeit",
+        NOT_SENT: "(noch) nicht versandt",
+    }
+
     _transitions = {
         SUCCESS: (FAILURE, IN_PROGRESS, NOT_SENT),
         FAILURE: (SUCCESS, IN_PROGRESS, NOT_SENT),
