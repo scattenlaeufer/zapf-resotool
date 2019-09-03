@@ -9,6 +9,12 @@ django.setup()
 import markdown
 
 from resoapp.models import Resolution, User, UserGroup, Recipient, ResoType
+from resotool import settings
+
+
+if not settings.DEBUG:
+    print("Don't create dummy data in production!")
+    exit()
 
 
 if len(Resolution.objects.all()) > 0:
