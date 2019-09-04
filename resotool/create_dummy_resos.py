@@ -8,7 +8,7 @@ import django
 django.setup()
 import markdown
 
-from resoapp.models import Resolution, User, UserGroup, Recipient, ResoType
+from resoapp.models import Resolution, User, UserGroup, Recipient, ResoType, ResolutionEmail, SendStatus
 from resotool import settings
 
 
@@ -111,6 +111,47 @@ reso1 = Resolution(
 )
 reso1.save()
 reso1.user_set.add(user1, user2, user3)
+
+recipient1 = Recipient(name='AFD', opening='Hallo,', postal_address='afdhausen')
+recipient1.save()
+recipient2 = Recipient(name='Grüne', opening='Hallo', postal_address='grünehausen')
+recipient2.save()
+recipient3 = Recipient(name='CDU', opening='Hallo,', postal_address='cduhausen')
+recipient3.save()
+
+mail1 = 'wunderbarer Text der dir sagt warum du diese blöde Mail bekommen hast'
+
+resomail1 = ResolutionEmail(
+    resolution=reso1,
+    recipient=recipient1,
+    email_text=mail1,
+)
+resomail1.save()
+
+resomail2 = ResolutionEmail(
+    resolution=reso1,
+    recipient=recipient2,
+    email_text=mail1,
+    status=SendStatus.IN_PROGRESS,
+)
+resomail2.save()
+
+resomail3 = ResolutionEmail(
+    resolution=reso1,
+    recipient=recipient3,
+    email_text=mail1,
+    status=SendStatus.FAILURE,
+)
+resomail3.save()
+
+resomail4 = ResolutionEmail(
+    resolution=reso1,
+    recipient=recipient1,
+    email_text=mail1,
+    status=SendStatus.SUCCESS,
+)
+resomail4.save()
+
 
 reso2_text = """In den vergangen Jahren hat sich der studentische
 Akkreditierungspool als Instanz zur Schulung von studentischen begutachtenden

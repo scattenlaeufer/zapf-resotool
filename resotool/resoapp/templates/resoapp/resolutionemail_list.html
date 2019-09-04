@@ -7,7 +7,10 @@
 <table class='table'>
 	<tr>
 		<th>
-			Betreff
+			ID
+		</th>
+		<th>
+			Resolution
 		</th>
 		<th>
 			Adressiert an
@@ -16,10 +19,13 @@
 			Status
 		</th>
 	</tr>
-	{% for email in resolutioneemail_list %}
+	{% for email in resolutionemail_list %}
 	<tr>
 		<td>
-			{{ email.resolution.title }}
+			{{ email.pk }}
+		</td>
+		<td>
+			<a href="{% url "resoapp:resolution" email.resolution.pk %}">{{ email.resolution.title }}</a>
 		</td>
 		<td>
 			{{ email.recipient.name }}
