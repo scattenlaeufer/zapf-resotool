@@ -65,7 +65,7 @@ class Recipient(models.Model):
     note = models.TextField(default="")
     email = models.EmailField(default="")
     opening = models.CharField(max_length=200)
-    postal_adress = models.CharField(max_length=400)
+    postal_address = models.CharField(max_length=400)
 
     def __str__(self):
         return f"{self.name} <{self.email}>"
