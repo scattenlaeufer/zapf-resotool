@@ -78,7 +78,7 @@ class ResolutionEmail(models.Model):
     status = enum.EnumField(SendStatus, default=SendStatus.NOT_SENT)
 
     def send_status_name(self):
-        return SendStatus.name(self.send_status)
+        return SendStatus.name(self.status)
 
 
 class UserGroup(models.Model):
