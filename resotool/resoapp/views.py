@@ -1,6 +1,6 @@
 from django.views import generic
 
-from .models import Resolution
+from .models import Resolution, ResolutionEmail
 
 
 class ResolutionListView(generic.ListView):
@@ -10,3 +10,7 @@ class ResolutionListView(generic.ListView):
 
 class ResolutionView(generic.DetailView):
     model = Resolution
+
+
+class ResolutionEmailListView(generic.ListView):
+    model = ResolutionEmail
