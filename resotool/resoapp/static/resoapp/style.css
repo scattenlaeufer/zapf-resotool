@@ -1,1 +1,14 @@
 @import "bootstrap/css/bootstrap.css";
+
+@media (min-width: 601px) {
+	.email_table {
+		width: 600px;
+	}
+}
+
+@media (max-width: 600px) {
+	.email_table {
+		width: 100%;
+	}
+}
+

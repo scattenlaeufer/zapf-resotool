@@ -22,7 +22,7 @@
 	{% for email in resolutionemail_list %}
 	<tr>
 		<td>
-			{{ email.pk }}
+			<a href="{% url "resoapp:emaildetail" email.pk %}">{{ email.pk }}</a>
 		</td>
 		<td>
 			<a href="{% url "resoapp:resolution" email.resolution.pk %}">{{ email.resolution.title }}</a>

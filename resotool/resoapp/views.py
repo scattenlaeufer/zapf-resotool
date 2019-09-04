@@ -13,8 +13,8 @@ class ResolutionView(generic.DetailView):
 
 
 class ResolutionEmailListView(generic.ListView):
-
     def get_queryset(self):
         return ResolutionEmail.objects.all().order_by("-pk")
-
-
+    
+class ResolutionEmailView(generic.DetailView):
+    model = ResolutionEmail

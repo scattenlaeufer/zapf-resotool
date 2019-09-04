@@ -1,0 +1,21 @@
+{% extends "resoapp/base.html" %}
+
+{% block content %}
+
+<h2> {{ resolutionemail.resolution.title }}</h2>
+<table class="table email_table">
+	<tr>
+		<th>Adressierte Person</th><td> {{ resolutionemail.recipient.name}}</td>
+	</tr>
+	<tr>
+		<th>E-mail Adresse</th><td> {{ resolutionemail.recipient.postal_address}}</td>
+	</tr>
+	<tr>
+		<th>Status</th><td> {{ resolutionemail.send_status_name}}</td>
+	<tr>
+		<th>Resolution</th><td><a href="{% url "resoapp:resolution" resolutionemail.resolution.pk %}">{{ resolutionemail.resolution.title }}</a></td>
+	</tr>
+</table>
+<h3>E-mail text</h3>
+{{ resolutionemail.email_text }}
+{% endblock %}
