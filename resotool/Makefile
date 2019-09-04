@@ -32,3 +32,6 @@ start-server: celery-start server celery-stop
 
 shell:
 	$(POETRY_RUN) ./manage.py shell
+
+dummy-data:
+	$(POETRY_RUN) ./create_dummy_resos.py
