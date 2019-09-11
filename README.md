@@ -31,6 +31,17 @@ to initalise the database, after which you can start hacking :)
 Run `make test` (or `poetry run pytest`) to run the tests and `make server` (or
 `poetry run ./manage.py runserver`) to run the development server.
 
+### pre-commit
+
+We are using [pre-commit](https://github.com/pre-commit/pre-commit) to enforce
+our coding style.
+
+Install pre-commit via your system package manager or `pip install --user pre-commit`
+and `pre-commit install` in this repository to enable the git hooks,
+pre-commit will then run on every commit.
+
+For more information have a look at the [pre-commit docs](https://pre-commit.com/#usage).
+
 ## Settings
 
 > **WARNING**: Do not change `CELERY_EMAIL_CHUNK_SIZE`! The current setting of

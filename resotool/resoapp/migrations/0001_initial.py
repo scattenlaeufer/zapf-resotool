@@ -10,79 +10,148 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Recipient',
+            name="Recipient",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('note', models.TextField(default='')),
-                ('email', models.EmailField(default='', max_length=254)),
-                ('opening', models.CharField(max_length=200)),
-                ('postal_adress', models.CharField(max_length=400)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("note", models.TextField(default="")),
+                ("email", models.EmailField(default="", max_length=254)),
+                ("opening", models.CharField(max_length=200)),
+                ("postal_adress", models.CharField(max_length=400)),
             ],
         ),
         migrations.CreateModel(
-            name='RecipientCollection',
+            name="RecipientCollection",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Resolution',
+            name="Resolution",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('date_submitted', models.DateTimeField(auto_now_add=True)),
-                ('date_enacted', models.DateTimeField(blank=True, null=True)),
-                ('date_sent', models.DateField(blank=True, null=True)),
-                ('reso_type', django_enumfield.db.fields.EnumField(default=1, enum=resoapp.models.ResoType)),
-                ('reso_text', models.TextField()),
-                ('reso_text_html', models.TextField(default='')),
-                ('motivation_text', models.TextField(default='')),
-                ('motivation_text_html', models.TextField(default='')),
-                ('pdf_path', models.FilePathField(default='')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("date_submitted", models.DateTimeField(auto_now_add=True)),
+                ("date_enacted", models.DateTimeField(blank=True, null=True)),
+                ("date_sent", models.DateField(blank=True, null=True)),
+                (
+                    "reso_type",
+                    django_enumfield.db.fields.EnumField(
+                        default=1, enum=resoapp.models.ResoType
+                    ),
+                ),
+                ("reso_text", models.TextField()),
+                ("reso_text_html", models.TextField(default="")),
+                ("motivation_text", models.TextField(default="")),
+                ("motivation_text_html", models.TextField(default="")),
+                ("pdf_path", models.FilePathField(default="")),
             ],
         ),
         migrations.CreateModel(
-            name='UserGroup',
+            name="UserGroup",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
             ],
         ),
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('university', models.CharField(default='', max_length=200)),
-                ('resolutions', models.ManyToManyField(to='resoapp.Resolution')),
-                ('user_groups', models.ManyToManyField(to='resoapp.UserGroup')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("university", models.CharField(default="", max_length=200)),
+                ("resolutions", models.ManyToManyField(to="resoapp.Resolution")),
+                ("user_groups", models.ManyToManyField(to="resoapp.UserGroup")),
             ],
         ),
         migrations.CreateModel(
-            name='ResolutionEmail',
+            name="ResolutionEmail",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email_text', models.TextField()),
-                ('status', django_enumfield.db.fields.EnumField(default=4, enum=resoapp.models.SendStatus)),
-                ('recipient', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='resoapp.Recipient')),
-                ('resolution', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='resoapp.Resolution')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email_text", models.TextField()),
+                (
+                    "status",
+                    django_enumfield.db.fields.EnumField(
+                        default=4, enum=resoapp.models.SendStatus
+                    ),
+                ),
+                (
+                    "recipient",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="resoapp.Recipient",
+                    ),
+                ),
+                (
+                    "resolution",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="resoapp.Resolution",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='recipient',
-            name='recipient_collection',
-            field=models.ManyToManyField(to='resoapp.RecipientCollection'),
+            model_name="recipient",
+            name="recipient_collection",
+            field=models.ManyToManyField(to="resoapp.RecipientCollection"),
         ),
         migrations.AddField(
-            model_name='recipient',
-            name='resolutions',
-            field=models.ManyToManyField(to='resoapp.Resolution'),
+            model_name="recipient",
+            name="resolutions",
+            field=models.ManyToManyField(to="resoapp.Resolution"),
         ),
     ]

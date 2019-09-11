@@ -1,0 +1,14 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: trailing-whitespace
+        exclude: '^resotool/resoapp/static/resoapp/bootstrap-4.3.1-dist/'
+    -   id: end-of-file-fixer
+        exclude: '^resotool/resoapp/static/resoapp/bootstrap-4.3.1-dist/'
+-   repo: https://github.com/psf/black
+    rev: 19.3b0
+    hooks:
+    -   id: black

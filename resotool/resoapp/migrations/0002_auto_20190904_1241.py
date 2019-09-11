@@ -5,14 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('resoapp', '0001_initial'),
-    ]
+    dependencies = [("resoapp", "0001_initial")]
 
     operations = [
         migrations.RenameField(
-            model_name='recipient',
-            old_name='postal_adress',
-            new_name='postal_address',
-        ),
+            model_name="recipient", old_name="postal_adress", new_name="postal_address"
+        )
     ]
