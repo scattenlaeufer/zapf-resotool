@@ -1,4 +1,4 @@
-name: Python Black
+name: Python linting
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - "*.py"
 
 jobs:
-  check_black:
+  black:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -24,3 +24,19 @@ jobs:
     - name: Check formatting with black
       run: |
         $HOME/.poetry/bin/poetry run black --check ./
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.7"
+    - name: Install Python dependencies
+      run: |
+        curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+        $HOME/.poetry/bin/poetry install
+    - name: Run pylint
+      run: |
+        cd resotool
+        $HOME/.poetry/bin/poetry run pylint resoapp resotool manage.py
