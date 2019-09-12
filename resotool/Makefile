@@ -12,6 +12,9 @@ CELERY_LOGLEVEL := info
 test:
 	$(POETRY_RUN) pytest
 
+pylint:
+	$(POETRY_RUN) pylint resoapp resotool manage.py
+
 migration:
 	$(POETRY_RUN) ./manage.py makemigrations
 	$(POETRY_RUN) ./manage.py migrate
