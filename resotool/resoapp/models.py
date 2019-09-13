@@ -113,6 +113,14 @@ class ResolutionEmail(models.Model):
 
     A ResolutionEmail object gets created for each Resolution and each
     Recipient, that Resolution should be sent to.
+
+    :param resolution models.ForeignKey[Resolution]: Resolution that should be
+            sent with this ResolutionEmail
+    :param recipient models.ForeignKey[Recipient]: Recipient this email should
+            should be sent to
+    :param email_text str: The mail text to be used in the resolution email
+    :param status SentStatus: enum with the send status of the ResolutionEmail.
+            Defaults to SentStatus.NOT_SENT
     """
 
     resolution = models.ForeignKey(Resolution, on_delete=models.CASCADE)
