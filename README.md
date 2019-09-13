@@ -23,8 +23,8 @@ make migration
 ```
 which runs
 ```
-poetry ./manage.py makemigrations
-poetry ./manage.py migrate
+poetry run ./manage.py makemigrations
+poetry run ./manage.py migrate
 ```
 to initalise the database, after which you can start hacking :)
 
