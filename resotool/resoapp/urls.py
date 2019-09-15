@@ -1,3 +1,7 @@
+"""
+Configuation of all URLs used in resoapp
+"""
+
 from django.urls import path
 
 from . import views

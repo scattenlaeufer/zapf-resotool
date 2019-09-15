@@ -9,8 +9,19 @@ CELERY_INSTANCE := celery_instance_1
 CELERY_MODULE := resotool.celery
 CELERY_LOGLEVEL := info
 
-test:
+test: check-poetry black pylint pytest
+
+pytest:
 	$(POETRY_RUN) pytest
+
+pylint:
+	$(POETRY_RUN) pylint resoapp resotool manage.py
+
+black:
+	$(POETRY_RUN) black --check ./
+
+check-poetry:
+	$(POETRY) check
 
 migration:
 	$(POETRY_RUN) ./manage.py makemigrations

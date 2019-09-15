@@ -1,12 +1,22 @@
-from celery import shared_task
-from celery.result import AsyncResult
+"""
+A set of tasks to be used by resotool.
+"""
+
 from django.core import mail
 
 from .models import Resolution, ResolutionEmail, SendStatus
-from resotool import settings
 
 
 def send_reso(reso_id, mail_text, subject, sender):
+    """
+    Send a resolution via email to all recipients. This uses the defined email
+    back end from Django
+
+    :param reso_id int: ID of the to be sent resolution
+    :param mail_text str: Text for all to be sent emails
+    :param subject str: Subject for all to be sent emails
+    :param sender str: Email address to be used as sender
+    """
     resolution = Resolution.objects.get(pk=reso_id)
     mail_list = []
     mail_data_list = []
@@ -31,6 +41,11 @@ def send_reso(reso_id, mail_text, subject, sender):
 
 
 def on_reso_sent(email):
+    """
+    Closure to set send status of ResolutionEmail objects on successful Celery
+    task completion.
+    """
+
     def return_func(result):
         email.status = SendStatus.SUCCESS if result.get() else SendStatus.FAILURE
         email.save()
@@ -39,7 +54,12 @@ def on_reso_sent(email):
 
 
 def on_send_error(email):
-    def return_func(result):
+    """
+    Closure to set send status of ResolutionEmail objects on failed Celery task
+    completion.
+    """
+
+    def return_func(_):
         email.status = SendStatus.FAILURE
         email.save()
 

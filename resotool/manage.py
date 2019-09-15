@@ -4,7 +4,7 @@ import os
 import sys
 
 
-def main():
+def main():  # pylint: disable=missing-docstring
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "resotool.settings")
     try:
         from django.core.management import execute_from_command_line
