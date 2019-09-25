@@ -1,5 +1,7 @@
 ifneq ("$(wildcard $(HOME)/.poetry/bin/poetry)", "")
 	POETRY := $(HOME)/.poetry/bin/poetry
+else ifneq ("$(wildcard /usr/local/bin/poetry)", "")
+	POETRY := /usr/local/bin/poetry
 else
 	POETRY := /usr/bin/poetry
 endif
