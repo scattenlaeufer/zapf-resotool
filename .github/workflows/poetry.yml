@@ -1,0 +1,19 @@
+name: Poetry check
+
+on: [push, pull_request]
+
+jobs:
+  check_poetry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v1
+        with:
+          python-version: "3.7"
+      - name: Install Poetry
+        run: |
+          curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+      - name: Check pyproject.toml
+        run: |
+          $HOME/.poetry/bin/poetry check

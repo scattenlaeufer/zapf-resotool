@@ -1,0 +1,12 @@
+[MASTER]
+load-plugins=pylint_django
+
+[MESSAGE]
+disable=no-else-return
+
+[DESIGN]
+max-parents=15
+
+[FORMAT]
+max-line-length=88
+ignore-long-lines=(^\s*(# )?<?https?://\S+>?|(",?)?)$
