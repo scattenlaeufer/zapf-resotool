@@ -1,0 +1,40 @@
+{% extends 'resoapp/base.html'%}
+
+{% block content %}
+
+<h2> Hier ist eine Liste aller E-Mails</h2>
+
+<table class='table'>
+	<tr>
+		<th>
+			ID
+		</th>
+		<th>
+			Resolution
+		</th>
+		<th>
+			Adressiert an
+		</th>
+		<th>
+			Status
+		</th>
+	</tr>
+	{% for email in resolutionemail_list %}
+	<tr>
+		<td>
+			<a href="{% url "resoapp:emaildetail" email.pk %}">{{ email.pk }}</a>
+		</td>
+		<td>
+			<a href="{% url "resoapp:resolution" email.resolution.pk %}">{{ email.resolution.title }}</a>
+		</td>
+		<td>
+			{{ email.recipient.name }}
+		</td>
+		<td>
+			{{ email.send_status_name }}
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}
+
