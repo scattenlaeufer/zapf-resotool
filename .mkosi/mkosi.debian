@@ -1,0 +1,21 @@
+[Distribution]
+Distribution=debian
+Release=buster
+
+[Output]
+Format=gpt_ext4
+Bootable=yes
+Hostname=resotool
+
+[Packages]
+WithNetwork=yes
+SourceFileTransfer=copy-git-cached
+BuildPackages=
+    python3-pip
+    python3-setuptools
+    python3-venv
+Packages=
+    python3
+    postgresql
+    redis
+    nginx
