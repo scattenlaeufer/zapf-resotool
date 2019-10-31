@@ -112,11 +112,11 @@ reso1 = Resolution(
 reso1.save()
 reso1.user_set.add(user1, user2, user3)
 
-recipient1 = Recipient(name='AFD', opening='Hallo,', postal_address='afdhausen')
+recipient1 = Recipient(name='AFD', opening='Hallo,', email='afdhausen@weird.de')
 recipient1.save()
-recipient2 = Recipient(name='Grüne', opening='Hallo', postal_address='grünehausen')
+recipient2 = Recipient(name='Grüne', opening='Hallo', email='grünehausen@seltsam.de')
 recipient2.save()
-recipient3 = Recipient(name='CDU', opening='Hallo,', postal_address='cduhausen')
+recipient3 = Recipient(name='CDU', opening='Hallo,', email='cduhausen@schlecht.de')
 recipient3.save()
 
 mail1 = 'wunderbarer Text der dir sagt warum du diese blöde Mail bekommen hast'
