@@ -8,7 +8,15 @@ import django
 django.setup()
 import markdown
 
-from resoapp.models import Resolution, User, UserGroup, Recipient, ResoType, ResolutionEmail, SendStatus
+from resoapp.models import (
+    Resolution,
+    User,
+    UserGroup,
+    Recipient,
+    ResoType,
+    ResolutionEmail,
+    SendStatus,
+)
 from resotool import settings
 
 
@@ -112,20 +120,16 @@ reso1 = Resolution(
 reso1.save()
 reso1.user_set.add(user1, user2, user3)
 
-recipient1 = Recipient(name='AFD', opening='Hallo,', email='afdhausen@weird.de')
+recipient1 = Recipient(name="AFD", opening="Hallo,", email="afdhausen@weird.de")
 recipient1.save()
-recipient2 = Recipient(name='Grüne', opening='Hallo', email='grünehausen@seltsam.de')
+recipient2 = Recipient(name="Grüne", opening="Hallo", email="grünehausen@seltsam.de")
 recipient2.save()
-recipient3 = Recipient(name='CDU', opening='Hallo,', email='cduhausen@schlecht.de')
+recipient3 = Recipient(name="CDU", opening="Hallo,", email="cduhausen@schlecht.de")
 recipient3.save()
 
-mail1 = 'wunderbarer Text der dir sagt warum du diese blöde Mail bekommen hast'
+mail1 = "wunderbarer Text der dir sagt warum du diese blöde Mail bekommen hast"
 
-resomail1 = ResolutionEmail(
-    resolution=reso1,
-    recipient=recipient1,
-    email_text=mail1,
-)
+resomail1 = ResolutionEmail(resolution=reso1, recipient=recipient1, email_text=mail1)
 resomail1.save()
 
 resomail2 = ResolutionEmail(
@@ -137,18 +141,12 @@ resomail2 = ResolutionEmail(
 resomail2.save()
 
 resomail3 = ResolutionEmail(
-    resolution=reso1,
-    recipient=recipient3,
-    email_text=mail1,
-    status=SendStatus.FAILURE,
+    resolution=reso1, recipient=recipient3, email_text=mail1, status=SendStatus.FAILURE
 )
 resomail3.save()
 
 resomail4 = ResolutionEmail(
-    resolution=reso1,
-    recipient=recipient1,
-    email_text=mail1,
-    status=SendStatus.SUCCESS,
+    resolution=reso1, recipient=recipient1, email_text=mail1, status=SendStatus.SUCCESS
 )
 resomail4.save()
 

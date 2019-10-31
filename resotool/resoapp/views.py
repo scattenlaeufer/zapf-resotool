@@ -25,8 +25,17 @@ class ResolutionView(generic.DetailView):
 
 
 class ResolutionEmailListView(generic.ListView):
+    """
+    View to get a list of all resolution emails
+    """
+
     def get_queryset(self):
         return ResolutionEmail.objects.all().order_by("-pk")
-    
+
+
 class ResolutionEmailView(generic.DetailView):
+    """
+    View to get the details of one resolution email
+    """
+
     model = ResolutionEmail
