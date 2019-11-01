@@ -1,4 +1,4 @@
-{% extends "resoapp/base.html" %}
+{% extends "resotool/base.html" %}
 
 {% block content %}
 
@@ -28,7 +28,7 @@
 	{% for resolution in resolution_list %}
 	<tr>
 		<td>
-			<a href="{% url "resoapp:resolution" resolution.id %}">{{ resolution.title }}</a>
+			<a href="{% url "resolution" resolution.id %}">{{ resolution.title }}</a>
 		</td>
 		<td>
 			{{ resolution.get_reso_type_display }}

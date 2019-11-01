@@ -1,4 +1,4 @@
-{% extends 'resoapp/base.html'%}
+{% extends 'resotool/base.html'%}
 
 {% block content %}
 
@@ -22,10 +22,10 @@
 	{% for email in resolutionemail_list %}
 	<tr>
 		<td>
-			<a href="{% url "resoapp:emaildetail" email.pk %}">{{ email.pk }}</a>
+			<a href="{% url "emaildetail" email.pk %}">{{ email.pk }}</a>
 		</td>
 		<td>
-			<a href="{% url "resoapp:resolution" email.resolution.pk %}">{{ email.resolution.title }}</a>
+			<a href="{% url "resolution" email.resolution.pk %}">{{ email.resolution.title }}</a>
 		</td>
 		<td>
 			{{ email.recipient.name }}
@@ -37,4 +37,3 @@
 	{% endfor %}
 </table>
 {% endblock %}
-

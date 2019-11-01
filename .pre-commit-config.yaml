@@ -5,9 +5,9 @@ repos:
     rev: v2.3.0
     hooks:
     -   id: trailing-whitespace
-        exclude: '^resotool/resoapp/static/resoapp/bootstrap-4.3.1-dist/'
+        exclude: '^resotool/resotool/static/resotool/bootstrap-4.3.1-dist/'
     -   id: end-of-file-fixer
-        exclude: '^resotool/resoapp/static/resoapp/bootstrap-4.3.1-dist/'
+        exclude: '^resotool/resotool/static/resotool/bootstrap-4.3.1-dist/'
 -   repo: https://github.com/psf/black
     rev: 19.3b0
     hooks:

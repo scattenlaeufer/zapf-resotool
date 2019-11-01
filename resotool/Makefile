@@ -17,7 +17,7 @@ pytest:
 	$(POETRY_RUN) pytest
 
 pylint:
-	$(POETRY_RUN) pylint resoapp resotool manage.py
+	$(POETRY_RUN) pylint resotool manage.py
 
 black:
 	$(POETRY_RUN) black --check ./

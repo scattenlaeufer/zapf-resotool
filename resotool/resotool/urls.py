@@ -1,19 +1,17 @@
-"""resotool URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
+Configuation of all URLs used in resotool
+"""
 
-urlpatterns = [path("", include("resoapp.urls")), path("admin/", admin.site.urls)]
+from django.contrib import admin
+from django.urls import path
+
+from . import views
+
+app_name = "resotool"
+urlpatterns = [
+    path("", views.ResolutionListView.as_view(), name="index"),
+    path("<int:pk>/", views.ResolutionView.as_view(), name="resolution"),
+    path("email/", views.ResolutionEmailListView.as_view(), name="email"),
+    path("email/<int:pk>/", views.ResolutionEmailView.as_view(), name="emaildetail"),
+    path("admin/", admin.site.urls),
+]

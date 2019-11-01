@@ -63,7 +63,7 @@ test to check whether sending mails through Celery is working correctly.
 
 To do this, a settings file must be created with the credentials of the
 mailboxes used for testing. The path to this file must be
-`resotool/resoapp/tests/celery_mail_test_settings.toml` and the file has the
+`resotool/resotool/tests/celery_mail_test_settings.toml` and the file has the
 following structure:
 ```
 [out]

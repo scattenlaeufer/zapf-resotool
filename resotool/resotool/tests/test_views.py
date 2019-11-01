@@ -6,7 +6,7 @@ from django.core import mail
 from django.test import TestCase
 from django.urls import reverse
 
-from resoapp import models
+from resotool import models
 
 
 class ResolutionDetailViewTests(TestCase):
@@ -26,9 +26,7 @@ class ResolutionDetailViewTests(TestCase):
         a 404 error page.
         """
 
-        response = self.client.get(
-            reverse("resoapp:resolution", args=(self.reso.pk + 1,))
-        )
+        response = self.client.get(reverse("resolution", args=(self.reso.pk + 1,)))
         self.assertEqual(404, response.status_code)
 
     def test_view_exists(self):
@@ -37,7 +35,7 @@ class ResolutionDetailViewTests(TestCase):
         a 200 status and the correct resolution.
         """
 
-        response = self.client.get(reverse("resoapp:resolution", args=(self.reso.pk,)))
+        response = self.client.get(reverse("resolution", args=(self.reso.pk,)))
         self.assertEqual(200, response.status_code)
         self.assertContains(response, self.reso.title)
 
@@ -76,13 +74,11 @@ class BasicResolutionEmailViewTests(TestCase):
 
 class ResolutionEmailViewTests(BasicResolutionEmailViewTests):
     def test_view_returns_404(self):
-        response = self.client.get(
-            reverse("resoapp:emaildetail", args=(self.email.pk + 1,))
-        )
+        response = self.client.get(reverse("emaildetail", args=(self.email.pk + 1,)))
         self.assertEqual(404, response.status_code)
 
     def test_view_exists(self):
-        response = self.client.get(reverse("resoapp:emaildetail", args=(self.reso.pk,)))
+        response = self.client.get(reverse("emaildetail", args=(self.reso.pk,)))
         self.assertEqual(200, response.status_code)
         self.assertEqual(self.email, response.context["object"])
-        self.assertTemplateUsed(response, "resoapp/resolutionemail_detail.html")
+        self.assertTemplateUsed(response, "resotool/resolutionemail_detail.html")

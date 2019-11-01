@@ -4,7 +4,7 @@ Collection of test for all resotapp database models
 
 from django.test import TestCase
 
-from resoapp import models
+from resotool import models
 
 
 class ResolutionTests(TestCase):

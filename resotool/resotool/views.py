@@ -1,5 +1,5 @@
 """
-Collection of all views of resoapp
+Collection of all views of resotool
 """
 
 from django.views import generic

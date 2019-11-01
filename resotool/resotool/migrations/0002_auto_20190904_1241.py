@@ -5,7 +5,7 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [("resoapp", "0001_initial")]
+    dependencies = [("resotool", "0001_initial")]
 
     operations = [
         migrations.RenameField(

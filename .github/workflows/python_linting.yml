@@ -33,4 +33,4 @@ jobs:
       - name: Run pylint
         run: |
           cd resotool
-          $HOME/.poetry/bin/poetry run pylint resoapp resotool manage.py
+          $HOME/.poetry/bin/poetry run pylint resotool manage.py

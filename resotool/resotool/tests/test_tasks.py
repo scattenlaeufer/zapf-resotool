@@ -12,8 +12,8 @@ from django.core import mail
 from django.test import TestCase
 from django.test.utils import override_settings
 
-from resoapp.models import Resolution, ResolutionEmail, SendStatus
-from resoapp.tasks import send_reso
+from resotool.models import Resolution, ResolutionEmail, SendStatus
+from resotool.tasks import send_reso
 from utils import celery_is_up
 
 
