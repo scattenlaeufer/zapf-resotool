@@ -1,12 +1,11 @@
 #!/usr/bin/bash
+
 set -x
-DESTDIR=/srv/resotool
+set -e
 
-mkdir -p $DESTDIR
-cd $DESTDIR || exit 1
-
-cp -r "$SRCDIR"/* $DESTDIR
+cp -ar "$SRCDIR"/* "$DESTDIR"
+cd $DESTDIR
 
 python3 -m pip install poetry
-poetry config --local settings.virtualenvs.in-project true
+poetry config -- settings.virtualenvs.in-project true
 poetry install --no-dev --no-interaction
