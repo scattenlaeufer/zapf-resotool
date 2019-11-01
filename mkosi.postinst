@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+set -x
+set -e
+
 DESTDIR=/root/destdir
 DEPLOYDIR=/srv/resotool
 
@@ -30,14 +33,17 @@ EOF
 if [ "$1" = build ]; then
     :
 else
-    if [ $(check_db_engine) = postgres ]; then
+    if [ $(check_db_engine) = "django.db.backends.postgresql_psycopg2" ]; then
         DBPASS=get_db_password
         set_up_db
     fi
+    # deploy app
+    mv $DESTDIR $DEPLOYDIR
+    cd $DEPLOYDIR
+
+    # run migrations
+    python3 resotool/manage.py migrate
+
+    # generate user to run resotool under
+    systemd-sysusers resotool.conf
 fi
-
-# deploy app
-mv $DESTDIR $DEPLOYDIR
-cd $DEPLOYDIR
-
-python3 resotool/manage.py migrate
