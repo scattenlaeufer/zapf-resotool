@@ -1,5 +1,5 @@
 """
-Collection of all database models used by resoapp
+Collection of all database models used by resotool
 """
 
 from django.db import models

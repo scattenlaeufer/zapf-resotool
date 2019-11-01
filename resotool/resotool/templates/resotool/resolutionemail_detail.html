@@ -1,4 +1,4 @@
-{% extends "resoapp/base.html" %}
+{% extends "resotool/base.html" %}
 
 {% block content %}
 
@@ -13,7 +13,7 @@
 	<tr>
 		<th>Status</th><td> {{ resolutionemail.send_status_name}}</td>
 	<tr>
-		<th>Resolution</th><td><a href="{% url "resoapp:resolution" resolutionemail.resolution.pk %}">{{ resolutionemail.resolution.title }}</a></td>
+		<th>Resolution</th><td><a href="{% url "resolution" resolutionemail.resolution.pk %}">{{ resolutionemail.resolution.title }}</a></td>
 	</tr>
 </table>
 <h3>E-mail text</h3>

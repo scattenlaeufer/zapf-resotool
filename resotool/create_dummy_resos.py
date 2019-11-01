@@ -8,7 +8,7 @@ import django
 django.setup()
 import markdown
 
-from resoapp.models import (
+from resotool.models import (
     Resolution,
     User,
     UserGroup,

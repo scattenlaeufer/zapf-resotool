@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import django_enumfield.db.fields
-import resoapp.models
+import resotool.models
 
 
 class Migration(migrations.Migration):
@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 (
                     "reso_type",
                     django_enumfield.db.fields.EnumField(
-                        default=1, enum=resoapp.models.ResoType
+                        default=1, enum=resotool.models.ResoType
                     ),
                 ),
                 ("reso_text", models.TextField()),
@@ -105,8 +105,8 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=200)),
                 ("university", models.CharField(default="", max_length=200)),
-                ("resolutions", models.ManyToManyField(to="resoapp.Resolution")),
-                ("user_groups", models.ManyToManyField(to="resoapp.UserGroup")),
+                ("resolutions", models.ManyToManyField(to="resotool.Resolution")),
+                ("user_groups", models.ManyToManyField(to="resotool.UserGroup")),
             ],
         ),
         migrations.CreateModel(
@@ -125,21 +125,21 @@ class Migration(migrations.Migration):
                 (
                     "status",
                     django_enumfield.db.fields.EnumField(
-                        default=4, enum=resoapp.models.SendStatus
+                        default=4, enum=resotool.models.SendStatus
                     ),
                 ),
                 (
                     "recipient",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="resoapp.Recipient",
+                        to="resotool.Recipient",
                     ),
                 ),
                 (
                     "resolution",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="resoapp.Resolution",
+                        to="resotool.Resolution",
                     ),
                 ),
             ],
@@ -147,11 +147,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="recipient",
             name="recipient_collection",
-            field=models.ManyToManyField(to="resoapp.RecipientCollection"),
+            field=models.ManyToManyField(to="resotool.RecipientCollection"),
         ),
         migrations.AddField(
             model_name="recipient",
             name="resolutions",
-            field=models.ManyToManyField(to="resoapp.Resolution"),
+            field=models.ManyToManyField(to="resotool.Resolution"),
         ),
     ]
