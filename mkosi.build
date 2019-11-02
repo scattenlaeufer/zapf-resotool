@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+set -x
+set -e
+
+cp -ar "$SRCDIR"/* "$DESTDIR"
+cd $DESTDIR
+
+python3 -m pip install poetry
+poetry config -- settings.virtualenvs.in-project true
+poetry install --no-dev --no-interaction
