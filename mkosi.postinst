@@ -39,6 +39,7 @@ else
     fi
     # deploy app
     mv $DESTDIR $DEPLOYDIR
+    chown -R resotool:www-data $DEPLOYDIR
     cd $DEPLOYDIR
 
     # run migrations
@@ -46,4 +47,42 @@ else
 
     # generate user to run resotool under
     systemd-sysusers resotool.conf
+
+    # install nginx config
+    cat > /etc/nginx/sites-available/resotool <<EOF
+server {
+    listen 80;
+    server_name server_domain_or_IP;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root ${DEPLOYDIR}/resotool/resotool/static/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:${DEPLOYDIR}/resotool/resotool.sock;
+    }
+}
+EOF
+    ln -sf /etc/nginx/sites-available/resotool /etc/nginx/sites-enabled
+
+    # install and enable gunicorn service file
+    cat > /etc/systemd/system/resotool.service <<EOF
+[Unit]
+Description=gunicorn daemon for resotool
+After=network.target nginx.service postgresql.service
+Requires=nginx.service postgresql.service
+
+[Service]
+User=resotool
+Group=www-data
+WorkingDirectory=${DEPLOYDIR}
+ExecStart=${DEPLOYDIR}/.venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:${DEPLOYDIR}/resotool/resotool.sock resotool.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl enable resotool.service
 fi
